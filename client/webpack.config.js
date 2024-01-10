@@ -2,12 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
-
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-
-
-
-// TODO: Add CSS loaders and babel to webpack.
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = () => {
   return {
@@ -22,43 +17,50 @@ module.exports = () => {
     },
       plugins: [
         new HtmlWebpackPlugin({
-          template: './src/index.html', 
-          filename: 'index.html', 
-          chunks: ['main'], 
+          template: './index.html', 
+          title: "J.A.T.E."
         }),
-        new HtmlWebpackPlugin({
-          template: './src/install.html', 
-          filename: 'install.html', 
-          chunks: ['install'], 
+        new InjectManifest({
+          swSrc: './src-sw.js', 
+          swDest: 'service-worker.js'
         }),
+        new MiniCssExtractPlugin(),
+        //  workbox plugins for a service worker and manifest file
         new WebpackPwaManifest({
-          name: 'PWA-Text-Editor',
-          short_name: 'App',
+          name: 'Just Another Text Editor',
+          inject: true,
+          fingerprints: false,
+          short_name: 'J.A.T.E.',
           description: 'A text editor that runs in the browser. Create notes or code snippets with or without an internet connection so you can reliably retrieve them for later use!',
-          background_color: '#ffffff',
-          theme_color: '#000000',
+          start_url: './',
+          publicPath: './',
+          purpose: 'maskable',
+          background_color: '#225ca3',
+          theme_color: '#225ca3',
+
           icons: [
             {
-              src: path.resolve('./src/images/logo.png'),
+              src: path.resolve(__dirname, './src/images/logo.png'),
               sizes: [96, 128, 192, 256, 384, 512],
-              destination: path.join('icons'),
+              destination: path.join('assets', 'icons'),
             },
           ],
         }),
-        new InjectManifest({
-          swSrc: './src/src-sw.js', 
-          swDest: 'service-worker.js'
-        }),
       ],
+      // CSS loaders and babel to webpack.
       module: {
         rules: [
           {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader'],
+            test: /\.css$/i,
+            use: [ MiniCssExtractPlugin.loader, 'css-loader'],
+          }, 
+          {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            type: 'asset/resource',
           },
           {
-            test: /\.js$/,
-            exclude: /node_modules/,
+            test: /\.m?js$/,
+            exclude: /(node_modules|bower_components)/,
             use: {
               loader: 'babel-loader',
               options: {
