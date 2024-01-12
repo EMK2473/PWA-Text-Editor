@@ -11,7 +11,6 @@ Licensing: [mit](https://choosealicense.com/licenses/mit/)
 - [License](#licensing-information)
 - [Contributions](#contributions)
 - [Tests](#tests-commands)
-- [Video Link](#link-to-video-instructions)
 - [Screenshot](#screenshot)
 - [Questions](#questions)
   
@@ -30,12 +29,10 @@ Eric Keeton
 ## Test Commands
 node index
   
-## Link to Video Instructions
-n/a
-  
 ## Screenshot
-![screenshot of application](n/a)
-  
+![screenshot of application](./client/src/images/jateManifest.png)
+![screenshot of application](./client/src/images/jateServiceWorkers.png)
+![screenshot of application](./client/src/images/jateIndexedDB.png)
 ## Questions
 For Questions, contact me at EMK2473@gmail.com or visit My Github[EMK2473](https://github.com/EMK2473)
   
