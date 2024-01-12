@@ -18,7 +18,10 @@ Licensing: [mit](https://choosealicense.com/licenses/mit/)
 A text editor that runs in the browser. Create notes or code snippetwith or without an internet connection so you can reliably retrievthem for later use!
   
 ## Installation Requirements
-concurrently@5.2.0 file-loader@6.2.0 mini-css-extract-plugin@2.7.nodemon@2.0.4
+- concurrently@5.2.0 
+- file-loader@6.2.0 
+- mini-css-extract-plugin@2.7.7
+- nodemon@2.0.4
   
 ## Application Usage
 Utilize the browser, or install directly to your device, to reliablretrieve them for later use!
