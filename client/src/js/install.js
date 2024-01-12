@@ -1,14 +1,17 @@
 const butInstall = document.getElementById('buttonInstall');
 let deferredPrompt; // Store event in the deferredPrompt variable for later use.
 
-if (localStorage.getItem('appInstalled')) {
-  butInstall.style.display = 'none';
-}
+// checks if app is installed in local storage
+// changes butInstall to display none if app is present in local storage
+
+
 // Logic for installing PWA
 window.addEventListener('beforeinstallprompt', (event) => {  
     event.preventDefault();
     deferredPrompt = event;
     butInstall.style.display = 'block';
+    console.log('beforeinstallprompt')
+    localStorage.removeItem('appInstalled')
 });
 
 // Click install button, call prompt() on the deferredPrompt to display install prompt. 
@@ -25,13 +28,20 @@ butInstall.addEventListener('click', async () => {
     }
     deferredPrompt = null;
     butInstall.style.display = 'none';}
+    console.log('click')
 });
 
 window.addEventListener('appinstalled', (event) => {
-    console.log('App installed successfully'); // 'appinstalled' event logs message when app is installed.
+    console.log('App installed successfully'); 
     localStorage.setItem('appInstalled', 'true');
 });
 
 if(window.matchMedia('(display-mode: standalone').matches) {
   butInstall.style.display = 'none';
+  console.log('matchMedia')
 };
+
+if (localStorage.getItem('appInstalled')) {
+  butInstall.style.display = 'none';
+  console.log('if')
+}

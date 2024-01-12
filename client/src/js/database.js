@@ -12,7 +12,6 @@ const initdb = async () =>
     },
   });
 
-
 export const putDb = async (content) => {
   try{
   const db = await openDB('jate', 2)
